@@ -1,0 +1,5 @@
+.env
+fatal_error.log
+follower_cache.json
+__pycache__/
+*.pyc
