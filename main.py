@@ -153,19 +153,9 @@ while True:
                     
                     if project.title != new_title:
                         project.set_title(new_title)
-                        print(f"New follower detected! Updated title to: {new_title}")
                 
                 follower_cache[current_follower_id] = datetime.now(timezone.utc).isoformat()
                 save_cache(follower_cache)
-            else:
-                print(f"Follower @{current_follower_name} already in cache. Ignoring re-follow.")
-        else:
-            if last_follower != "":
-                last_follower = ""
-                new_title = "@nobody | Live follower title"
-                if project.title != new_title:
-                    project.set_title(new_title)
-                    print("No followers found. Updated title.")
             
         if was_in_error:
             recovery_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
