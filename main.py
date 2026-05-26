@@ -148,14 +148,15 @@ while True:
             
             if is_new_follower(current_follower_id, follower_cache):
                 if current_follower_name != last_follower:
-                    last_follower = current_follower_name
-                    new_title = f"@{last_follower} | Live follower title"
+                    new_title = f"@{current_follower_name} | Live follower title"
                     
-                    if project.title != new_title:
+                    try:
                         project.set_title(new_title)
-                
-                follower_cache[current_follower_id] = datetime.now(timezone.utc).isoformat()
-                save_cache(follower_cache)
+                        last_follower = current_follower_name
+                        follower_cache[current_follower_id] = datetime.now(timezone.utc).isoformat()
+                        save_cache(follower_cache)
+                    except Exception as e:
+                        print(f"Failed to update follower title: {e}")
             
         if was_in_error:
             recovery_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
